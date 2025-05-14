@@ -1462,8 +1462,8 @@ int webalizer_t::proc_logfile(proc_times_t& ptms, logrec_counts_t& lrcnt)
 
          // check for out of sequence records
          if (rec_tstamp < state.totals.cur_tstamp) {
-            lrcnt.total_ignore++; 
-            continue; 
+            rec_tstamp = state.totals.cur_tstamp; // Adjust rec_tstamp to the current state timestamp
+            htab_tstamp = rec_tstamp.mktime();   // Ensure htab_tstamp is consistent with rec_tstamp
          }
 
          total_good++;
